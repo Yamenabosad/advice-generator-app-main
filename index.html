@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="box">
+      <h2>ADVICE #<span id="idQuote">117</span></h2>
+      <div id="quote">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, ab!"</div>
+      <img src="./images/pattern-divider-mobile.svg" alt="">
+      <div id="button" onclick="getQuote()">
+        <img src="./images/icon-dice.svg" alt="">
+      </div>
+    </div>
+  </div>
+  
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+
+  
+  function getQuote(){
+    axios.get('https://api.adviceslip.com/advice')
+      .then(function (response) {
+        // handle success
+        let quote = response.data.slip.advice;
+        let idQuote = response.data.slip.id;
+        document.getElementById("quote").innerHTML = `"${quote}"`
+        document.getElementById("idQuote").innerHTML = `${idQuote}`
+        
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+
+      // console.log(quote)
+      
+    
+  }
+</script>
+</html>
